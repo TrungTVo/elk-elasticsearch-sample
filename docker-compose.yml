@@ -7,6 +7,9 @@ services:
     build:
       context: ./
       dockerfile: ./elasticsearch/Dockerfile
+    environment:
+      - ES_SETTING_CLUSTER_NAME=my-docker-cluster   # same as cluster.name, but prefix with "ES_SETTING_"
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
     ports:
       - '9200:9200'
       - '9300:9300'

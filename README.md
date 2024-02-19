@@ -42,6 +42,8 @@ export ELASTIC_PASSWORD="your_password"
 echo $ELASTIC_PASSWORD
 ```
 
+In the host, we can manually set this `ELASTIC_PASSWORD` as an environment variable and then run `docker compose up`. This will pass this value into environment variables defined in ES container of `docker-compose.yml`. Once ES container starts, `ELASTIC_PASSWORD` will also be accessible inside ES container as well.
+
 Check the ES node info
 
 ```
