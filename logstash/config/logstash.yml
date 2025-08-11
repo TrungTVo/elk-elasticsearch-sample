@@ -1,0 +1,9 @@
+api.http.port: 9600
+api.http.host: '0.0.0.0'
+
+# to ensure events ordering and autodetect_column_names in CSV plugin
+# pipeline.workers: 1
+
+# Select default main pipeline. If not specify, it will process events log in round-robin fashion
+pipeline.id: 'beat'
+path.config: '/usr/share/logstash/pipeline/beat.conf'

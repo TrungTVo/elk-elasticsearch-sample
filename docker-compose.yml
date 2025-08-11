@@ -1,28 +1,60 @@
-version: '3.8'
-
 services:
   elasticsearch:
-    image: trungtvo/custom-elasticsearch:latest
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.1.1
     container_name: es01
     build:
       context: ./
       dockerfile: ./elasticsearch/Dockerfile
     environment:
+      - discovery.type=single-node
       - ES_SETTING_CLUSTER_NAME=my-docker-cluster   # same as cluster.name, but prefix with "ES_SETTING_"
-      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - xpack.security.enabled=false                # for simplicity, disable security settings
+      - xpack.security.http.ssl.enabled=false       # for simplicity, disable security settings
     ports:
       - '9200:9200'
       - '9300:9300'
     networks:
       - elasticnet
   kibana:
-    image: trungtvo/custom-kibana:latest
+    image: docker.elastic.co/kibana/kibana:9.1.1
     container_name: kib01
     build:
       context: ./
       dockerfile: ./kibana/Dockerfile
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     ports:
       - '5601:5601'
+    networks:
+      - elasticnet
+    depends_on:
+      - elasticsearch
+  filebeat:
+    image: trungtvo/custom-filebeat:2.0
+    container_name: my-filebeat-ctn
+    build:
+      context: ./
+      dockerfile: ./filebeat/Dockerfile
+    volumes:
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./workspace_data/:/usr/share/filebeat/workspace_data/
+    depends_on:
+      - logstash
+    networks:
+      - elasticnet
+  logstash:
+    image: trungtvo/custom-logstash:2.0
+    container_name: my-logstash-ctn
+    build:
+      context: ./
+      dockerfile: ./logstash/Dockerfile
+    volumes:
+      - ./logstash/config/:/usr/share/logstash/config/
+      - ./logstash/pipeline/:/usr/share/logstash/pipeline/
+      - ./workspace_data/:/usr/share/logstash/workspace_data/
+    ports:
+      - '5044:5044'
+      - '9600:9600'
     networks:
       - elasticnet
     depends_on:

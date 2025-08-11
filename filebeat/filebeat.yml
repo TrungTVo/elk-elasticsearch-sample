@@ -1,0 +1,16 @@
+filebeat.inputs:
+  - type: filestream
+    id: filebeat-stacktrace
+    paths:
+      - /usr/share/filebeat/workspace_data/stacktrace.log
+    prospector.scanner.fingerprint:
+      enabled: false
+    parsers:
+    - multiline:
+        type: pattern
+        pattern: "^\\s"
+        negate: false
+        match: after
+
+output.logstash:
+  hosts: ['logstash:5044']

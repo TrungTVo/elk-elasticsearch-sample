@@ -8,6 +8,8 @@ docker compose up
 
 ## Elasticsearch Container
 
+### For ES Security settings:
+
 Go inside ES container
 
 ```

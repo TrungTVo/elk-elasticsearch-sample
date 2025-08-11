@@ -1,0 +1,18 @@
+Exception in thread "main" java.lang.NullPointerException
+    at com.example.MyClass.method2(MyClass.java:25)
+    at com.example.MyClass.method1(MyClass.java:15)
+    at com.example.Main.main(Main.java:8)
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException
+    at com.example.MyClass.method3(MyClass.java:38)
+    at com.example.MyClass.method2(MyClass.java:25)
+Exception in thread "main" java.lang.InterruptedException
+    at com.example.MyClass.method3(MyClass.java:48)
+    at com.example.MyClass.method2(MyClass.java:35)
+Exception in thread "main"
+    at com.example.MyClass.method3(MyClass.java:98)
+    at com.example.MyClass.method2(MyClass.java:95)
+    at com.example.MyClass.method2(MyClass.java:195)
+    at com.example.MyClass.method2(MyClass.java:295)
+    at com.example.MyClass.method2(MyClass.java:395)
+    at com.example.MyClass.method2(MyClass.java:495)
+    at com.example.MyClass.method2(MyClass.java:595)
