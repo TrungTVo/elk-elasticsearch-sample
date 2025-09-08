@@ -2,9 +2,6 @@ services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.1.1
     container_name: es01
-    build:
-      context: ./
-      dockerfile: ./elasticsearch/Dockerfile
     environment:
       - discovery.type=single-node
       - ES_SETTING_CLUSTER_NAME=my-docker-cluster   # same as cluster.name, but prefix with "ES_SETTING_"
@@ -18,9 +15,6 @@ services:
   kibana:
     image: docker.elastic.co/kibana/kibana:9.1.1
     container_name: kib01
-    build:
-      context: ./
-      dockerfile: ./kibana/Dockerfile
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     ports:
