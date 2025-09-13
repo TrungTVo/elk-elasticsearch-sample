@@ -37,7 +37,7 @@ $ /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic
 $ /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana
 ```
 
-Export the password into ENV variable in the shell/bash
+Export the password into ENV variable in the shell/bash (Or store in `.env` file)
 
 ```
 export ELASTIC_PASSWORD="your_password"
